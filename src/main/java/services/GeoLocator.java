@@ -5,5 +5,6 @@ package main.java.services;
  */
 public class GeoLocator {
 
-    //GeoLocator
+//    GeoLocator geoLocator = new GeoLocator();
+//    geoLocator.
 }

@@ -14,9 +14,9 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="366.0" prefWidth="416.0">
+      <AnchorPane prefHeight="366.0" prefWidth="416.0" stylesheets="@../css/stlesheet.css">
          <children>
-            <Label layoutX="84.0" layoutY="143.0" text="%key.unspecified" />
+            <Label layoutX="190.0" layoutY="102.0" text="Button" />
          </children></AnchorPane>
    </children>
 </GridPane>

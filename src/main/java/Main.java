@@ -22,6 +22,8 @@ public class Main extends Application {
         primaryStage.setTitle(bundle.getString("AppName"));
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+
+        Controller controller = new Controller();
     }
 
 
