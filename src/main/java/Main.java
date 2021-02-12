@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
@@ -23,7 +22,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
 
-        Controller controller = new Controller();
+        //Creating the viewController of the application.
+        ViewController viewController = new ViewController();
     }
 
 

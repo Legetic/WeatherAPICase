@@ -1,14 +1,22 @@
 package main.java;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import main.java.services.ApiContentFetcher;
 import main.java.services.OpenWeatherMapParser;
 
+
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class ViewController implements Initializable {
 
     private ResourceBundle bundle;
 
@@ -33,6 +41,11 @@ public class Controller implements Initializable {
      */
     private String apiurl;
 
+
+    //FXML things
+    @FXML
+    private TextArea airResultList;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bundle = resources;
@@ -40,9 +53,35 @@ public class Controller implements Initializable {
         //Field variables set and rounded (so they are allowed in the api).
         setLatLong(lat, lng);
 
+        //Populate List
+        populateAirResultList(getAirInformation());
+
+    }
+
+    /**populates the air pollution list
+     *
+     * @param airInfo
+     */
+    private void populateAirResultList(Map<String, Double> airInfo){
+
+        for (String key:airInfo.keySet()) {
+            airResultList.appendText(key + ": " + airInfo.get(key) + "\n");
+        }
+
+    }
+
+    /**
+     * Gets information on air pollution.
+     * @return
+     */
+    private Map<String, Double> getAirInformation(){
+
+        Map<String, Double> airQualityMap = new HashMap<>();
+
         //Building the URL.
         this.apiurl = "http://api.openweathermap.org/data/2.5/air_pollution?lat=63.825&lon=20.263&appid=" + apiKey;
 
+        //Fetch content from the api.
         ApiContentFetcher contentFetcher = new ApiContentFetcher();
         String apiContent = null;
         try {
@@ -51,15 +90,17 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
 
+        //Parse content from the api.
         if(apiContent != null){
             OpenWeatherMapParser apiParser = new OpenWeatherMapParser();
             try {
-                apiParser.parseWeather(apiContent);
+                airQualityMap = apiParser.parseWeather(apiContent);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
 
+        return airQualityMap;
     }
 
     /**

@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.json:json:20201115" level="project" />
     <orderEntry type="library" name="com.maxmind.geoip2:geoip2:2.15.0" level="project" />
+    <orderEntry type="library" name="junit:junit:4.13" level="project" />
   </component>
 </module>

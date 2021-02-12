@@ -1,7 +1,5 @@
 package main.java.services;
 
-import org.json.simple.parser.JSONParser;
-import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
 import java.net.URL;

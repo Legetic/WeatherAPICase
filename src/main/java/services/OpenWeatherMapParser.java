@@ -24,15 +24,8 @@ public class OpenWeatherMapParser {
 
 
     /**
-     * Parses the weather API JSON object.
+     * Parses the weather API string response (JSON).
      */
-
-
-    public OpenWeatherMapParser() {
-
-
-
-    }
 
     //Parses the weather API to gather current-day air quality information.
     public Map<String, Double> parseWeather(String stringResponse) throws JSONException, MalformedURLException {
