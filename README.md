@@ -1,6 +1,6 @@
 # WeatherAPICase
 ## Running the program
-Below are ways to run the program.
+Below are ways to install and run the program.
 
 ### Using an IDE
 1. Clone repo to directory of choice
