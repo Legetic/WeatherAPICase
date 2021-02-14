@@ -19,7 +19,7 @@ public class Main extends Application {
 
         //Define features of main window.
         primaryStage.setTitle(bundle.getString("AppName"));
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
 
         //Creating the viewController of the application.
