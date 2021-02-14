@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_weathercase" default="compile.module.weathercase">
+  <dirname property="module.weathercase.basedir" file="${ant.file.module_weathercase}"/>
+  
+  <property name="module.jdk.home.weathercase" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.weathercase" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.weathercase" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.weathercase" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="weathercase.output.dir" value="${module.weathercase.basedir}/out/production/WeatherCase"/>
+  <property name="weathercase.testoutput.dir" value="${module.weathercase.basedir}/out/test/WeatherCase"/>
+  
+  <path id="weathercase.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="weathercase.module.production.classpath">
+    <path refid="${module.jdk.classpath.weathercase}"/>
+    <path refid="library.org.json:json:20201115.classpath"/>
+    <path refid="library.com.maxmind.geoip2:geoip2:2.15.0.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="weathercase.runtime.production.module.classpath">
+    <pathelement location="${weathercase.output.dir}"/>
+    <path refid="library.org.json:json:20201115.classpath"/>
+    <path refid="library.com.maxmind.geoip2:geoip2:2.15.0.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="weathercase.module.classpath">
+    <path refid="${module.jdk.classpath.weathercase}"/>
+    <pathelement location="${weathercase.output.dir}"/>
+    <path refid="library.org.json:json:20201115.classpath"/>
+    <path refid="library.com.maxmind.geoip2:geoip2:2.15.0.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="weathercase.runtime.module.classpath">
+    <pathelement location="${weathercase.testoutput.dir}"/>
+    <pathelement location="${weathercase.output.dir}"/>
+    <path refid="library.org.json:json:20201115.classpath"/>
+    <path refid="library.com.maxmind.geoip2:geoip2:2.15.0.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.weathercase">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.weathercase">
+    <patternset refid="excluded.from.module.weathercase"/>
+  </patternset>
+  
+  <path id="weathercase.module.sourcepath">
+    <dirset dir="${module.weathercase.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.weathercase" depends="compile.module.weathercase.production,compile.module.weathercase.tests" description="Compile module WeatherCase"/>
+  
+  <target name="compile.module.weathercase.production" depends="register.custom.compilers" description="Compile module WeatherCase; production classes">
+    <mkdir dir="${weathercase.output.dir}"/>
+    <javac2 destdir="${weathercase.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.weathercase}/javac">
+      <compilerarg line="${compiler.args.weathercase}"/>
+      <bootclasspath refid="weathercase.module.bootclasspath"/>
+      <classpath refid="weathercase.module.production.classpath"/>
+      <src refid="weathercase.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.weathercase"/>
+    </javac2>
+    
+    <copy todir="${weathercase.output.dir}">
+      <fileset dir="${module.weathercase.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.weathercase.tests" depends="register.custom.compilers,compile.module.weathercase.production" description="compile module WeatherCase; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.weathercase" description="cleanup module">
+    <delete dir="${weathercase.output.dir}"/>
+    <delete dir="${weathercase.testoutput.dir}"/>
+  </target>
+</project>

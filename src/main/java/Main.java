@@ -12,10 +12,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        ResourceBundle bundle = ResourceBundle.getBundle("main/resources/Strings_en");
+        ResourceBundle bundle = ResourceBundle.getBundle("Strings_en");
 
         //Set root FXML
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/view/mainView.fxml"),bundle);
+        ClassLoader classLoader = Main.class.getClassLoader();
+
+        Parent root = FXMLLoader.load(classLoader.getResource("view/mainView.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("../resources/view/mainView.fxml"),bundle);
 
         //Define features of main window.
         primaryStage.setTitle(bundle.getString("AppName"));
