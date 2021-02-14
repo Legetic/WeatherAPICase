@@ -1,13 +1,13 @@
 # WeatherAPICase
-##Running the program
+## Running the program
 Below are ways to run the program.
 
-###Using an IDE
+### Using an IDE
 1. Clone repo to directory of choice
 2. Open repo in IDE of choice
 3. Run Main.java
 
-###No IDE
+### No IDE
 1. Clone repo to directory of choice
 2. Go to: "WeatherCase\lib\" in a terminal
 3. run "java -jar WeatherCase.jar"
